@@ -1,0 +1,27 @@
+{
+  "name": "blogapp-react-django",
+  "version": "1.0.0",
+  "description": "Blog App built with React and Django",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development --watch ./BlogApp/frontend/src/index.js --output ./BlogApp/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./BlogApp/frontend/src/index.js --output ./BlogApp/frontend/static/frontend/main.js"
+  },
+  "author": "Federico Chiavassa",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "reactstrap": "^8.0.0"
+  }
+}
