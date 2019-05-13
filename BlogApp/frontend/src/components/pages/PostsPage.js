@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Button } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import PostsList from '../post/PostsList';
-// import Pagination from '../layout/Pagination';
+import Pagination from '../layout/Pagination';
 
 function PostsPage({ auth, match, post }) {
   const id = match.params.id || 1;
@@ -26,15 +26,15 @@ function PostsPage({ auth, match, post }) {
   return (   
     <Container>
         <h1 className="mb-4 d-inline-block">Posts</h1>
-        {/* {auth.isAuthenticated ? button : null} */}
-        {/* <Pagination page={parseInt(id)}/> */}
+        {auth.isAuthenticated ? button : null}
+        <Pagination page={parseInt(id)}/>
         <PostsList page={id} />
     </Container>
   );
 }
 
 const mapStateToProps = (state) => ({
-    // auth: state.auth,
+    auth: state.auth,
     post: state.post
 });
 

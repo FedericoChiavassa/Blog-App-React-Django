@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink as RRNavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 import {
     Collapse,
     Navbar,
@@ -14,6 +16,7 @@ import {
     DropdownItem,
     Container
 } from 'reactstrap';
+import Logout from '../auth/Logout';
 
 class AppNavbar extends Component {
     state = {
@@ -27,6 +30,29 @@ class AppNavbar extends Component {
     }
 
     render() {
+        const { isAuthenticated, user } = this.props.auth;
+
+        const authLinks = (
+            <Fragment>
+                <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                    <span className="navbar-text">
+                        <strong>{ user ? `Welcome ${user.name}` : '' }</strong>
+                    </span>
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem tag={RRNavLink} to="/dashboard">
+                    Dashboard
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    <Logout />
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Fragment>
+        );
+
         const guestLinks = (
             <Fragment>
                 <NavItem>
@@ -53,7 +79,7 @@ class AppNavbar extends Component {
                                 </NavItem>
                             </Nav>
                             <Nav className="ml-auto" navbar>
-                                {guestLinks}
+                                { isAuthenticated ? authLinks : guestLinks }
                             </Nav>
                         </Collapse>
                     </Container>     
@@ -63,4 +89,12 @@ class AppNavbar extends Component {
     }
 }
 
-export default AppNavbar;
+AppNavbar.propTypes = {
+    auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(AppNavbar);
