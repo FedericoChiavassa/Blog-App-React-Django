@@ -15,7 +15,7 @@ import { clearErrors } from "../../actions/errorActions";
 
 class Login extends Component {
     state = {
-        email: '',
+        username: '',
         password: ''
     }
 
@@ -30,10 +30,10 @@ class Login extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        const { email, password } = this.state;
+        const { username, password } = this.state;
 
         const user = {
-            email,
+            username,
             password
         };
         
@@ -55,12 +55,12 @@ class Login extends Component {
             <div>
                 <Form onSubmit={this.onSubmit} className="mt-3">
                     <FormGroup>
-                        <Label for="email">Email</Label>
+                        <Label for="username">Username</Label>
                         <Input 
-                            type="email"
-                            name="email"
-                            id="email"
-                            placeholder="Email"
+                            type="text"
+                            name="username"
+                            id="username"
+                            placeholder="Username"
                             className="mb-3"
                             onChange={this.onChange}
                         />
@@ -97,7 +97,7 @@ Login.propTypes = {
 const mapStateToProps = (state, ownParams) => ({
     isAuthenticated: state.auth.isAuthenticated,
     error: state.error,
-    auth:state.auth,
+    auth: state.auth,
     history: ownParams.history,
     location: ownParams.location
 });

@@ -23,12 +23,12 @@ class PostsList extends Component {
         const { posts } = this.props.post;
         const { page } = this.props;
         const { isAuthenticated } = this.props.auth;
-
+        
         if(posts.length < 1) {
             if(!isAuthenticated)
-                return (<p>There are no posts yet. To create a new post you need to <Link to="/register">Register</Link> or <Link to="/login">Login</Link>.</p>);
+            return (<p>There are no posts yet. To create a new post you need to <Link to="/register">Register</Link> or <Link to="/login">Login</Link>.</p>);
             else
-                return (<p>There are no posts yet.</p>);
+            return (<p>There are no posts yet.</p>);
         }
 
         return(
@@ -49,7 +49,7 @@ class PostsList extends Component {
                                 pathname: `/posts/${post.id}`,
                                 state: { from: `/posts/page${page}` }
                             }}>{post.title}</Link>
-                            <br/><small>written on: {new Date(post.created_at).toLocaleString()} by: {/*post.author.name*/} </small>
+                            <br/><small>written on: {new Date(post.created_at).toLocaleString()} by: {post.author.username} </small>
                         </ListGroupItem>
                     ))}
                 </ListGroup>

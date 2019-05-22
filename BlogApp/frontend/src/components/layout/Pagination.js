@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 
 class Pagination extends Component {
   render() {
-    const { hasPrevPage, hasNextPage } = this.props.post;
+    const { PrevPage, NextPage, totalPages } = this.props.post;
     const { page } = this.props;
 
-    if(!hasPrevPage && !hasNextPage) return null;
+    if(!PrevPage && !NextPage) return null;
 
     const prev = (
         <Fragment>
@@ -29,17 +29,17 @@ class Pagination extends Component {
 
     return (
       <RSPagination>
-        { hasPrevPage ? prev : (
+        { PrevPage ? prev : (
             <PaginationItem disabled >
                 <PaginationLink previous />
             </PaginationItem>
         ) }
         <PaginationItem >
           <PaginationLink>
-            Page {page}
+            Page {page}/{totalPages}
           </PaginationLink>
         </PaginationItem>
-        { hasNextPage ? next : (
+        { NextPage ? next : (
             <PaginationItem disabled >
                 <PaginationLink next />
             </PaginationItem>

@@ -16,7 +16,7 @@ export const getPosts = () => dispatch => {
 
 export const getPostsOfPage = (id) => dispatch => {
     dispatch(setPostsLoading());
-    axios.get(`/api/posts/page${id}`)
+    axios.get(`/api/posts/?page=${id}`)
         .then(res => dispatch({
             type: GET_POSTS_PER_PAGE,
             payload: res.data
@@ -24,12 +24,12 @@ export const getPostsOfPage = (id) => dispatch => {
 
 };
 
-export const getUserPosts = (id) => dispatch => {
+export const getUserPosts = () => (dispatch, getState) => {
     dispatch(setPostsLoading());
-    axios.get(`/api/posts/user/${id}`)
+    axios.get('/api/user/posts/', tokenConfig(getState))
         .then(res => dispatch({
             type: GET_USER_POSTS,
-            payload: res.data
+            payload: res.data,
         }))
 
 };
@@ -51,7 +51,7 @@ export const deletePost = (id) => (dispatch, getState) => {
 
 export const addPost = (post) => (dispatch, getState) => {
     dispatch(clearPostState());
-    axios.post('/api/posts/', post, tokenConfig(getState))
+    axios.post('/api/user/posts/', post, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: ADD_POST,
@@ -66,7 +66,7 @@ export const addPost = (post) => (dispatch, getState) => {
 
 export const getPost = (id) => (dispatch) => {
     dispatch(setPostsLoading());
-    axios.get(`/api/posts/${id}`)
+    axios.get(`/api/posts/${id}/`)
         .then(res => dispatch({
             type: GET_POST,
             payload: res.data
@@ -75,7 +75,7 @@ export const getPost = (id) => (dispatch) => {
 
 export const updatePost = (id, post) => (dispatch, getState) => {
     dispatch(clearPostState());
-    axios.put(`/api/posts/${id}`, post, tokenConfig(getState))
+    axios.put(`/api/posts/${id}/`, post, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: UPDATE_POST,

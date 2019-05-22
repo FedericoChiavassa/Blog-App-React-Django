@@ -32,7 +32,7 @@ export const loadUser = () => (dispatch, getState) => {
 }
 
 // Register User
-export const register = ({ name, email, password }) => dispatch => {
+export const register = ({ username, email, password }) => dispatch => {
     // Headers
     const config = {
         headers: {
@@ -41,9 +41,9 @@ export const register = ({ name, email, password }) => dispatch => {
     };
 
     // Request body
-    const body = JSON.stringify({ name, email, password });
+    const body = JSON.stringify({ username, email, password });
 
-    axios.post('/api/users', body, config)
+    axios.post('/api/auth/register', body, config)
         .then(res => {
             dispatch({
                 type: REGISTER_SUCCESS,
@@ -52,6 +52,7 @@ export const register = ({ name, email, password }) => dispatch => {
             dispatch(createMessage('Registration Successfull'));
         })
         .catch(err => {
+            console.log(err.response.data)
             dispatch(createMessage(err.response.data.msg, 'error'));
             dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
             dispatch({
@@ -61,7 +62,7 @@ export const register = ({ name, email, password }) => dispatch => {
 }
 
 // Login User
-export const login = ({ email, password }) => dispatch => {
+export const login = ({ username, password }) => dispatch => {
     // Headers
     const config = {
         headers: {
@@ -70,9 +71,9 @@ export const login = ({ email, password }) => dispatch => {
     };
 
     // Request body
-    const body = JSON.stringify({ email, password });
+    const body = JSON.stringify({ username, password });
 
-    axios.post('/api/auth', body, config)
+    axios.post('/api/auth/login', body, config)
         .then(res => {
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -90,12 +91,19 @@ export const login = ({ email, password }) => dispatch => {
 }
 
 // Logout User
-export const logout = () => dispatch => {
-    dispatch({
-        type: LOGOUT_SUCCESS
-    });
-    dispatch(createMessage('Logout Successfull'));
-};
+export const logout = () => (dispatch, getState) => {
+    axios
+        .post("/api/auth/logout/", null, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: LOGOUT_SUCCESS
+            });
+            dispatch(createMessage('log out successfull'));
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+        });
+}
 
 // Setup config/headers and token
 export const tokenConfig = getState => {
@@ -112,7 +120,7 @@ export const tokenConfig = getState => {
 
     // If token, add to headers
     if (token) {
-        config.headers['x-auth-token'] = token;
+        config.headers['Authorization'] = `Token ${token}`;
     }
 
     return config;

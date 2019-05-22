@@ -37,7 +37,7 @@ class AppNavbar extends Component {
                 <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                     <span className="navbar-text">
-                        <strong>{ user ? `Welcome ${user.name}` : '' }</strong>
+                        <strong>{ user ? `Welcome ${user.username}` : '' }</strong>
                     </span>
                 </DropdownToggle>
                 <DropdownMenu right>

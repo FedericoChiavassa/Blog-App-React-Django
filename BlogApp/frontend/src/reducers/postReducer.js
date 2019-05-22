@@ -4,8 +4,8 @@ const initialState = {
     posts: [],
     post: {},
     loading: false,
-    hasPrevPage: false,
-    hasNextPage: false,
+    PrevPage: false,
+    NextPage: false,
     totalPages: 9999
 }
 
@@ -21,11 +21,11 @@ export default function(state = initialState, action) {
         case GET_POSTS_PER_PAGE:
             return {
                 ...state,
-                posts: action.payload.docs,
+                posts: action.payload.results,
                 loading: false,
-                hasPrevPage: action.payload.hasPrevPage,
-                hasNextPage: action.payload.hasNextPage,
-                totalPages: action.payload.totalPages
+                PrevPage: action.payload.previous,
+                NextPage: action.payload.next,
+                totalPages: action.payload.totpages
             };
         case GET_POST:
             return {

@@ -15,7 +15,7 @@ import { clearErrors } from "../../actions/errorActions";
 
 class Register extends Component {
     state = {
-        name: '',
+        username: '',
         email: '',
         password: ''
     }
@@ -31,11 +31,11 @@ class Register extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        const { name, email, password } = this.state;
+        const { username, email, password } = this.state;
 
         // Create user object
         const newUser = {
-            name,
+            username,
             email,
             password
         }
@@ -51,19 +51,19 @@ class Register extends Component {
 
         return(
             <div>
-                <Form onSubmit={this.onSubmit}>
+                <Form onSubmit={this.onSubmit} className="mt-3">
                     <FormGroup>
-                        <Label for="name">Name</Label>
+                        <Label for="username">Username</Label>
                         <Input 
                             type="text"
-                            name="name"
-                            id="name"
-                            placeholder="Name"
+                            name="username"
+                            id="username"
+                            placeholder="Username"
                             className="mb-3"
                             onChange={this.onChange}
                         />
 
-                        <Label for="email">Email</Label>
+                        <Label for="email">Email <small className="font-italic">( optional )</small></Label>
                         <Input 
                             type="email"
                             name="email"

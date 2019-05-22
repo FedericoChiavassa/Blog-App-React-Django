@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 class UserPosts extends Component {
 
     componentDidMount() {
-        this.props.getUserPosts(this.props.auth.user.id);
+        this.props.getUserPosts();
     }
 
     onDeleteClick = (id) => {
@@ -55,13 +55,11 @@ class UserPosts extends Component {
 UserPosts.propTypes = {
     getUserPosts: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
-    post: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    post: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    post: state.post,
-    auth: state.auth
+    post: state.post
 });
 
 export default connect(mapStateToProps, { getUserPosts, deletePost })(UserPosts);
