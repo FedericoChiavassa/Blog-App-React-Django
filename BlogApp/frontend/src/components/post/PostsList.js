@@ -41,7 +41,7 @@ class PostsList extends Component {
                                 to={{ pathname: `/posts/${post.id}`, state: { from: `/posts/page${page}` }}}
                                 className="mr-3 float-left">
                                 <img
-                                    src={'/' + post.image} style={imgStyle} 
+                                    src={post.image} style={imgStyle} 
                                     className=" img-thumbnail"  
                                     alt="PostImage" />
                             </Media>

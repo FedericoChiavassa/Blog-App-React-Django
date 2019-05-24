@@ -52,7 +52,6 @@ class PostDetails extends Component {
                 </Fragment>
             )
             
-            console.log(post);
             return(
                 <Fragment>
                     <Button
@@ -62,7 +61,7 @@ class PostDetails extends Component {
                     >← Go Back</Button>
                     { (isAuthenticated && author.id === user.id)  ? buttons : null }
                     <h1>{post.title}</h1>
-                    { post.image !== 'public/images/noimage.jpg' ? (<img style={imgStyle} src={'/' + post.image} alt="PostImage" className="mt-4"/>) : null }
+                    { post.image !== 'http://localhost:8000/media/noimage.jpg' ? (<img style={imgStyle} src={post.image} alt="PostImage" className="mt-4"/>) : null }
                     <p className="mt-4 mb-4">{post.body}</p>
                     <footer className="mb-5">
                     <small>Author: {author.username}</small><br/>
