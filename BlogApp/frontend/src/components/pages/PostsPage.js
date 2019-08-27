@@ -19,8 +19,10 @@ function PostsPage({ auth, match, post }) {
     >+ New Post</Button>
   );
 
-  if(isNaN(id) || id > post.totalPages ||  id < 1) {
-      return <Redirect to="/posts" />
+  if(post.totalPages > 0) {
+      if(isNaN(id) || id > post.totalPages ||  id < 1) {
+        return <Redirect to="/posts" />
+      }
   }
 
   return (   

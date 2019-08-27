@@ -1,0 +1,2 @@
+corsheader
+pillow
