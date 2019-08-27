@@ -22,14 +22,16 @@ class NewPostForm extends Component {
         e.preventDefault();
         const { from } = this.props.location.state || { from: { pathname: '/dashboard' } };
         const { title, body } = this.state;
-        const image =  e.target.image.files[0];
+        const image =  e.target.image.files[0] || null;
         
         if(title === "" || body === "") {
            return this.props.createMessage('Please fill in all the fields!', "error");
         }
 
         const post = new FormData();
-        post.append('image', image);
+        if(image !== null){
+            post.append('image', image);
+        }
         post.append('title', title);
         post.append('body', body);
 
