@@ -1,8 +1,15 @@
 # Blog App - React & Django
 
-> This is a blog application made with React and Bootstrap 4 for the frontend and Django REST Framework at the backend.
+> Blog application created with the aim to improve and showcase my skills in working with different technologies including the following.
 
-## Quick Start
+## Technologies
+- React
+- Redux
+- Danjo REST Framework
+- SQlite
+- Bootstrap 4
+
+## Getting Started
 
 #### Run Virtual Environment
 ``` bash
